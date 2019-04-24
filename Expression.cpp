@@ -55,6 +55,27 @@ public:
 			return false;
 	}
 }; konversi SC;
+
+//ini kelas untuk evaluasi
+class Eval{
+private:
+	stack Data;
+
+public:
+	void push(int input){
+		Data.top++;
+		Data.Stack[Data.top] = input;
+	}
+
+	void pop(){
+		Data.top--;
+	}
+
+	int Top(){
+		return Data.Stack[Data.top];
+	}
+}; Eval SE;
+
 //bagian ini untuk konversi
 bool isOperand(char input);
 bool isOperator(char input);
