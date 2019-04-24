@@ -150,3 +150,62 @@ bool Operand(char input){
 	else
 		return false;
 }
+double Operation(int op1, char c, int op2){
+	if(c == '^')
+		return (pwr(op1,op2));
+	else if(c == '*')
+		return (op1 * op2);
+	else if(c == '/')
+		return (op1 / op2);
+	else if(c == '+')
+		return (op1 + op2);
+	else if(c == '-')
+		return (op1 - op2);
+	else return 0;
+}
+
+double Evaluate(string input){
+	int i = 0;
+	while(input[i] != '\0'){
+		if(Operand(input[i])){
+			int operand = 0;
+			while(input[i] != '\0' && Operand(input[i])){
+				operand = (operand * 10) + (input[i] - 48);
+				i++;
+			}
+			SE.push(operand);
+		}
+		if(isOperator(input[i])){
+			int A = SE.Top(); SE.pop();
+			int B = SE.Top(); SE.pop();
+			int result = Operation(B,input[i],A);
+			SE.push(result);
+		}
+		i++;
+	}
+	return SE.Top();
+}
+// ini bagian main nya
+int main(){
+	
+	cout<<"||=====================================================||"<<endl;
+	cout<<"||              EVALUATE AN EXPRESSION                 ||"<<endl;
+	cout<<"||               DEVELOPED BY AABD                     ||"<<endl;
+	cout<<"||=====================================================||"<<endl;
+	cout<<"||             Github = https://github.com/KelompokAABD||"<<endl;
+	cout<<"||Anggota :                                            ||"<<endl;
+	cout<<"||       1857051014 Muhammad Nur Ashiddiqi             ||"<<endl;
+	cout<<"||       1817051005 Arfina Shella Meilany              ||"<<endl;
+	cout<<"||       1817051021 Arafia Isnayu Akaf                 ||"<<endl;
+	cout<<"||       1817051049 Bobby Malela                       ||"<<endl;
+	cout<<"||=====================================================||"<<endl<<endl;
+	string I;
+	cout<<"||Enter Infix Expression = ";
+	getline(cin,I);
+	string P = ITP(I);
+	cout<<"\n||Infix Your Enter = "<< I;
+	cout<<"\n||Postfix of Infix = "<< P;
+	int result = Evaluate(P);
+	cout<<"\n||Evaluate Expression = "<< result;
+	return 0;
+}
