@@ -55,3 +55,32 @@ public:
 			return false;
 	}
 }; konversi SC;
+//bagian ini untuk konversi
+bool isOperand(char input);
+bool isOperator(char input);
+int N(char input);
+bool persen(char input1, char input2);
+string ITP(string input);
+
+
+//bagian ini untuk evaluasi
+double Operation(int op1, char c, int op2);
+bool Operand(char input);
+double Evaluate(string input);
+double pow(double number, double exp);
+// ini bagian proses konversi
+bool isOperand(char input){
+	int c = (int)input;
+	if(c >= 48 && c <= 57 || c >= 65 && c <= 90 || c >= 97 && c <= 122)
+		return true;
+	else
+		return false;
+}
+
+bool isOperator(char input){
+	int c = (int)input;
+	if(c == 94 || c >= 42 && c <= 43 || c == 45 || c == 47)//
+		return true;
+	else
+		return false;
+}
