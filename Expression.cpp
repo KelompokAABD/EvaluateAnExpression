@@ -84,3 +84,69 @@ bool isOperator(char input){
 	else
 		return false;
 }
+bool persen(char input1, char input2){
+	int c1 = N(input1);
+	int c2 = N(input2);
+
+	if(c1 <= c2)
+		return true;
+	else
+		return false;
+}
+
+string ITP(string input){
+	SC.init();
+	int i=0;
+	string P = "";
+	while(input[i] != '\0'){
+		if(isOperand(input[i])){
+			P += input[i];
+		}
+		if(input[i] == '('){
+			SC.push(input[i]);
+		}
+		if(input[i] == ')'){
+			while(!SC.isEmpty() && SC.Top() != '('){
+				P = P + " " + SC.Top(); SC.pop();
+			}
+			SC.pop();
+		}
+		if(isOperator(input[i])){
+			if(SC.isEmpty() || SC.Top() == '('){
+				SC.push(input[i]);
+			}else{
+				while(!SC.isEmpty() && SC.Top() != '(' && persen(input[i], SC.Top())){
+					P = P + " " + SC.Top(); SC.pop();
+				}
+				SC.push(input[i]);
+			}
+		}
+		if(isOperator(input[i]))
+			P += " ";
+		i++;
+	}
+	while(!SC.isEmpty()){
+		P = P + " " + SC.Top(); SC.pop();
+	}
+	return P;
+}
+
+// ini bagian proses evaluasi
+double pwr(double num, double exp){
+	for(int i=1; i<exp; i++)
+		num *= num;
+	return num;
+}
+
+bool Operand(char input){
+	int c = (int)input;
+	if(c >= 48 && c <= 57)
+		return true;
+	else if(c >= 65 && c <= 90 || c >= 97 && c <= 122){
+		cout << "\nNot Evaluated" << endl;
+		cin.get();
+		exit(0);
+	}
+	else
+		return false;
+}
